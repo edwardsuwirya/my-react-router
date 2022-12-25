@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import LoginPage from "./pages/loginPage/LoginPage";
+import DashboardPage from "./pages/dashboardPage/DashboardPage";
+import {useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+    const {services} = props;
+    const [currUser, setCurrUser] = useState('');
+    const [page, setPage] = useState(0);
+
+    const handleGoToDashboard = (user) => {
+        setCurrUser(user.userInfo);
+        setPage(1);
+    }
+
+    const handleLogout = () => {
+        setCurrUser('');
+        setPage(0);
+    }
+    return (
+        <>
+            {page === 0 && <LoginPage onNavigate={handleGoToDashboard} service={[services.authService]}/>}
+            {page === 1 && <DashboardPage onNavigate={handleLogout} userInfo={currUser}/>}
+        </>
+    );
 }
 
 export default App;
