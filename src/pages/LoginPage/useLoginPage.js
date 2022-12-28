@@ -24,7 +24,7 @@ const useLoginPage = (onNavigate, service) => {
         }
     }, [viewState]);
 
-    const fn = (userData) => {
+    const requestAuth = (userData) => {
         let errors = {}
         if (userData.password === '') {
             errors = {...errors, password: errorMessage.emptyPassword}
@@ -43,7 +43,7 @@ const useLoginPage = (onNavigate, service) => {
         const userData = {
             userName: userNameInputElement.current?.value, password: passwordInputElement.current?.value,
         };
-        await asyncReq(() => fn(userData));
+        await asyncReq(() => requestAuth(userData));
     }
     return {
         viewState, refs: {userNameInputElement, passwordInputElement}, handleAuth
