@@ -13,7 +13,7 @@ const userLoginSuccess = (user) => {
         }
     }
 }
-const userLoginError = (error) => {
+export const userLoginError = (error) => {
     return {
         type: ACTION.LOGIN_ERROR,
         payload: {
@@ -21,19 +21,32 @@ const userLoginError = (error) => {
         }
     }
 }
-export const userLogout = () => {
+const userLogoutRequest = () => {
     return {
-        type: ACTION.LOGOUT
+        type: ACTION.LOGOUT_REQUEST
+    }
+}
+const userLogoutSuccess = () => {
+    return {
+        type: ACTION.LOGOUT_SUCCESS,
     }
 }
 
-export const postLogin = (authService) => async dispatch => {
+export const postLogin = (authLoginService) => async dispatch => {
     dispatch(userLoginRequest())
     try {
-        const response = await authService();
+        const response = await authLoginService();
         dispatch(userLoginSuccess(response));
     } catch (e) {
         dispatch(userLoginError(e));
     }
-
+}
+export const postLogout = (authLogoutService) => async dispatch => {
+    dispatch(userLogoutRequest())
+    try {
+        const response = await authLogoutService();
+        dispatch(userLogoutSuccess(response));
+    } catch (e) {
+        console.log(e)
+    }
 }

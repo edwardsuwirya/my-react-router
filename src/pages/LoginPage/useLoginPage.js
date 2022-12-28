@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import {errorMessage} from "../../constants";
-import {postLogin} from "../../state/userCredential/userCredentialAction";
+import {postLogin, userLoginError} from "../../state/userCredential/userCredentialAction";
 import {useDispatch, useSelector} from "react-redux";
 
 const useLoginPage = (onNavigate, service) => {
@@ -22,7 +22,10 @@ const useLoginPage = (onNavigate, service) => {
         }
     }, [userState]);
 
-    const requestAuth = (userData) => {
+    const handleAuth = () => {
+        const userData = {
+            userName: userNameInputElement.current?.value, password: passwordInputElement.current?.value,
+        };
         let errors = {}
         if (userData.password === '') {
             errors = {...errors, password: errorMessage.emptyPassword}
@@ -31,17 +34,10 @@ const useLoginPage = (onNavigate, service) => {
             errors = {...errors, userName: errorMessage.emptyUserName}
         }
         if (Object.keys(errors).length > 0) {
-            return Promise.reject(errors)
+            dispatch(userLoginError(errors));
         } else {
-            return service.auth(userData);
+            dispatch(postLogin(() => service.auth(userData)))
         }
-
-    }
-    const handleAuth = async () => {
-        const userData = {
-            userName: userNameInputElement.current?.value, password: passwordInputElement.current?.value,
-        };
-        dispatch(postLogin(() => requestAuth(userData)))
     }
     return {
         userState, refs: {userNameInputElement, passwordInputElement}, handleAuth

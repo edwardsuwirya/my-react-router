@@ -1,22 +1,20 @@
-import React from 'react';
-import {userLogout} from "../../../../state/userCredential/userCredentialAction";
+import React, {useEffect} from 'react';
+import {postLogout} from "../../../../state/userCredential/userCredentialAction";
 import {connect} from "react-redux";
 
-const HeaderUserInfo = ({onNavigate, service, user, userLogout}) => {
-    const handleLogout = async () => {
-        try {
-            const result = await service.logout();
-            if (result) {
-                userLogout();
-                onNavigate('/');
-            }
-        } catch (e) {
+const HeaderUserInfo = ({onNavigate, service, userState, postLogout}) => {
+    useEffect(() => {
+        if (!userState.userInfo) {
+            onNavigate('/');
         }
+    }, [userState])
+    const handleLogout = () => {
+        postLogout(service.logout)
     }
     return (
         <div>
             <div style={{textAlign: 'right'}}>
-                <span>Welcome {user.userInfo}</span>
+                <span>Welcome {userState.userInfo}</span>
                 <div onClick={handleLogout} style={{cursor: 'pointer'}}>Logout
                 </div>
             </div>
@@ -25,10 +23,10 @@ const HeaderUserInfo = ({onNavigate, service, user, userLogout}) => {
 };
 
 const mapStateToProps = state => {
-    return {user: state.userCredentialReducer}
+    return {userState: state.userCredentialReducer}
 }
 
-const mapDispatchToProps = {
-    userLogout
-}
+const mapDispatchToProps = (dispatch) => ({
+    postLogout: (authService) => dispatch(postLogout(authService))
+})
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderUserInfo);
