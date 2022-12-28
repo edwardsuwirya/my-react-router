@@ -9,7 +9,7 @@ const authService = () => {
                 } else {
                     reject('unauthorized');
                 }
-            }, 3000)
+            }, 1000)
         })
     }
     const doLogout = () => {

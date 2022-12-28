@@ -25,7 +25,7 @@ const LoginPage = ({onNavigate, service}) => {
                 <FormButton id={'buttonLogin'} onClick={handleAuth} label={'Sign In'}
                             disabled={viewState.isLoading}/>
                 {viewState.error &&
-                    <span style={{color: 'red'}}>{viewState.error.login}</span>}
+                    <span style={{color: 'red'}}>{viewState.error.request}</span>}
             </div>
         </div>
     )

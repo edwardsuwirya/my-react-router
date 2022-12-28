@@ -1,43 +1,49 @@
-import useViewState from "../../shared/hooks/useViewState";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import {errorMessage} from "../../constants";
 import {userLogin} from "../../state/userCredential/userCredentialAction";
 import {useDispatch} from "react-redux";
+import useAsync from "../../shared/hooks/useAsync";
 
 const useLoginPage = (onNavigate, service) => {
-    const {viewState, setLoading, setError} = useViewState();
-    const dispatch = useDispatch()
+    const [asyncReq, viewState] = useAsync();
+    const dispatch = useDispatch();
     const userNameInputElement = useRef('');
     const passwordInputElement = useRef('');
     const clearForm = () => {
         userNameInputElement.current.value = '';
         passwordInputElement.current.value = '';
     }
-    const handleAuth = async () => {
-        setLoading();
-        const userData = {
-            userName: userNameInputElement.current?.value,
-            password: passwordInputElement.current?.value,
-        };
-        if (userData.userName && userData.password) {
-            try {
-                const user = await service.auth(userData);
-                dispatch(userLogin(user.userInfo));
-                onNavigate('/dashboard');
-            } catch (e) {
-                clearForm();
-                setError({...viewState.error, login: errorMessage.invalidLogin})
-            }
-        } else {
-            let errors = {}
-            if (userData.password === '') {
-                errors = {...errors, password: errorMessage.emptyPassword}
-            }
-            if (userData.userName === '') {
-                errors = {...errors, userName: errorMessage.emptyUserName}
-            }
-            setError({...errors})
+
+    useEffect(() => {
+        if (viewState.error) {
+            clearForm();
         }
+        if (viewState.data) {
+            dispatch(userLogin(viewState.data));
+            onNavigate('/dashboard');
+        }
+    }, [viewState]);
+
+    const fn = (userData) => {
+        let errors = {}
+        if (userData.password === '') {
+            errors = {...errors, password: errorMessage.emptyPassword}
+        }
+        if (userData.userName === '') {
+            errors = {...errors, userName: errorMessage.emptyUserName}
+        }
+        if (Object.keys(errors).length > 0) {
+            throw errors;
+        } else {
+            return service.auth(userData);
+        }
+
+    }
+    const handleAuth = async () => {
+        const userData = {
+            userName: userNameInputElement.current?.value, password: passwordInputElement.current?.value,
+        };
+        await asyncReq(() => fn(userData));
     }
     return {
         viewState, refs: {userNameInputElement, passwordInputElement}, handleAuth

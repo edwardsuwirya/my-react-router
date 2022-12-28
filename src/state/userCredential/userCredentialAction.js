@@ -1,15 +1,15 @@
-import {action} from "../../constants";
+import {ACTION} from "../../constants";
 
 export const userLogin = (user) => {
     return {
-        type: action.LOGIN,
+        type: ACTION.LOGIN,
         payload: {
-            user
+            user: user.userInfo
         }
     }
 }
 export const userLogout = () => {
     return {
-        type: action.LOGOUT
+        type: ACTION.LOGOUT
     }
 }

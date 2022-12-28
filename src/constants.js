@@ -4,7 +4,7 @@ export const errorMessage = {
     invalidLogin: 'Invalid user name or password'
 }
 
-export const action = {
+export const ACTION = {
     LOGIN: 'login',
     LOGOUT: 'logout'
 }

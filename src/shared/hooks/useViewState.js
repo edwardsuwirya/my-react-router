@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 const useViewState = () => {
-    const [viewState, setViewState] = useState({isLoading: false, data: null, error: null})
+    const [viewState, setViewState] = useState({isLoading: false, data: null, error: null});
     const setLoading = (isLoading = true) => {
         setViewState({isLoading: isLoading, data: null, error: null})
     }
