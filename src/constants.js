@@ -5,6 +5,8 @@ export const errorMessage = {
 }
 
 export const ACTION = {
-    LOGIN: 'login',
+    LOGIN_REQUEST: 'login_request',
+    LOGIN_SUCCESS: 'login_success',
+    LOGIN_ERROR: 'login_error',
     LOGOUT: 'logout'
 }

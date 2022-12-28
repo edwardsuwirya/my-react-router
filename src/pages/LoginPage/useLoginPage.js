@@ -1,12 +1,11 @@
 import {useEffect, useRef} from "react";
 import {errorMessage} from "../../constants";
-import {userLogin} from "../../state/userCredential/userCredentialAction";
-import {useDispatch} from "react-redux";
-import useAsync from "../../shared/hooks/useAsync";
+import {postLogin} from "../../state/userCredential/userCredentialAction";
+import {useDispatch, useSelector} from "react-redux";
 
 const useLoginPage = (onNavigate, service) => {
-    const [asyncReq, viewState] = useAsync();
     const dispatch = useDispatch();
+    const userState = useSelector(state => state.userCredentialReducer)
     const userNameInputElement = useRef('');
     const passwordInputElement = useRef('');
     const clearForm = () => {
@@ -15,14 +14,13 @@ const useLoginPage = (onNavigate, service) => {
     }
 
     useEffect(() => {
-        if (viewState.error) {
+        if (userState.error) {
             clearForm();
         }
-        if (viewState.data) {
-            dispatch(userLogin(viewState.data));
+        if (userState.userInfo) {
             onNavigate('/dashboard');
         }
-    }, [viewState]);
+    }, [userState]);
 
     const requestAuth = (userData) => {
         let errors = {}
@@ -43,10 +41,10 @@ const useLoginPage = (onNavigate, service) => {
         const userData = {
             userName: userNameInputElement.current?.value, password: passwordInputElement.current?.value,
         };
-        await asyncReq(() => requestAuth(userData));
+        dispatch(postLogin(() => requestAuth(userData)))
     }
     return {
-        viewState, refs: {userNameInputElement, passwordInputElement}, handleAuth
+        userState, refs: {userNameInputElement, passwordInputElement}, handleAuth
     }
 }
 export default useLoginPage;
