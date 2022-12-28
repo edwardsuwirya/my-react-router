@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {serviceFactory} from "./services/serviceFactory";
+import {serviceFactory} from "./services";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const services = serviceFactory();

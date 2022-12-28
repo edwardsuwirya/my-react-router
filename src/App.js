@@ -1,27 +1,38 @@
 import './App.css';
-import LoginPage from "./pages/loginPage/LoginPage";
-import DashboardPage from "./pages/dashboardPage/DashboardPage";
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
 import {useState} from "react";
 
 const App = (props) => {
     const {services} = props;
     const [currUser, setCurrUser] = useState('');
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState('/');
 
-    const handleGoToDashboard = (user) => {
-        setCurrUser(user.userInfo);
-        setPage(1);
+    let Component;
+    let compProps = {};
+
+    switch (page) {
+        case "/dashboard":
+            Component = DashboardPage;
+            compProps = {
+                ...compProps,
+                setCurrUser,
+                userInfo: currUser,
+                service: {logout: services.authService.doLogout}
+            }
+            break;
+        default:
+            Component = LoginPage;
+            compProps = {
+                ...compProps,
+                setCurrUser,
+                service: {auth: services.authService.doAuth}
+            }
+            break;
     }
 
-    const handleLogout = () => {
-        setCurrUser('');
-        setPage(0);
-    }
     return (
-        <>
-            {page === 0 && <LoginPage onNavigate={handleGoToDashboard} service={[services.authService]}/>}
-            {page === 1 && <DashboardPage onNavigate={handleLogout} userInfo={currUser}/>}
-        </>
+        <Component onNavigate={setPage} {...compProps}/>
     );
 }
 

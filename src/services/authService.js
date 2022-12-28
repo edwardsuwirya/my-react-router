@@ -1,8 +1,6 @@
+import registeredUser from '../sample/user.json';
+
 const authService = () => {
-    const registeredUser = {
-        userName: 'enigma',
-        password: '123'
-    }
     const doAuth = ({userName, password}) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -14,7 +12,14 @@ const authService = () => {
             }, 3000)
         })
     }
-    return {doAuth}
+    const doLogout = () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(true)
+            }, 1000)
+        })
+    }
+    return {doAuth, doLogout}
 }
 
 export default authService;
