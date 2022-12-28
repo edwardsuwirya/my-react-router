@@ -33,7 +33,7 @@ const useLoginPage = (onNavigate, service) => {
             errors = {...errors, userName: errorMessage.emptyUserName}
         }
         if (Object.keys(errors).length > 0) {
-            throw errors;
+            return Promise.reject(errors)
         } else {
             return service.auth(userData);
         }

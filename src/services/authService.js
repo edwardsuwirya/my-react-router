@@ -7,7 +7,7 @@ const authService = () => {
                 if (userName === registeredUser.userName && password === registeredUser.password) {
                     resolve({userInfo: userName})
                 } else {
-                    reject('unauthorized');
+                    reject({'request': 'unauthorized'});
                 }
             }, 1000)
         })

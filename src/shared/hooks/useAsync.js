@@ -10,7 +10,7 @@ const useAsync = () => {
             setData(res);
         } catch (e) {
             console.log(e)
-            setError({'request': e});
+            setError(e);
         }
     }
 
