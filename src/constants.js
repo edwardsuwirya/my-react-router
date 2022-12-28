@@ -3,3 +3,8 @@ export const errorMessage = {
     emptyPassword: 'Password is required',
     invalidLogin: 'Invalid user name or password'
 }
+
+export const action = {
+    LOGIN: 'login',
+    LOGOUT: 'logout'
+}

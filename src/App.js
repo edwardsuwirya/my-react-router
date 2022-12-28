@@ -5,7 +5,6 @@ import {useState} from "react";
 
 const App = (props) => {
     const {services} = props;
-    const [currUser, setCurrUser] = useState('');
     const [page, setPage] = useState('/');
 
     let Component;
@@ -16,8 +15,6 @@ const App = (props) => {
             Component = DashboardPage;
             compProps = {
                 ...compProps,
-                setCurrUser,
-                userInfo: currUser,
                 service: {logout: services.authService.doLogout}
             }
             break;
@@ -25,7 +22,6 @@ const App = (props) => {
             Component = LoginPage;
             compProps = {
                 ...compProps,
-                setCurrUser,
                 service: {auth: services.authService.doAuth}
             }
             break;

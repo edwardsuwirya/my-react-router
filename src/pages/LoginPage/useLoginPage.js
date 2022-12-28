@@ -1,9 +1,12 @@
 import useViewState from "../../shared/hooks/useViewState";
 import {useRef} from "react";
 import {errorMessage} from "../../constants";
+import {userLogin} from "../../state/userCredential/userCredentialAction";
+import {useDispatch} from "react-redux";
 
-const useLoginPage = (setCurrUser, onNavigate, service) => {
+const useLoginPage = (onNavigate, service) => {
     const {viewState, setLoading, setError} = useViewState();
+    const dispatch = useDispatch()
     const userNameInputElement = useRef('');
     const passwordInputElement = useRef('');
     const clearForm = () => {
@@ -19,7 +22,7 @@ const useLoginPage = (setCurrUser, onNavigate, service) => {
         if (userData.userName && userData.password) {
             try {
                 const user = await service.auth(userData);
-                setCurrUser(user.userInfo);
+                dispatch(userLogin(user.userInfo));
                 onNavigate('/dashboard');
             } catch (e) {
                 clearForm();

@@ -1,11 +1,13 @@
 import React from 'react';
+import {userLogout} from "../../../../state/userCredential/userCredentialAction";
+import {connect} from "react-redux";
 
-const HeaderUserInfo = ({userInfo, setCurrUser, onNavigate, service}) => {
+const HeaderUserInfo = ({onNavigate, service, user, userLogout}) => {
     const handleLogout = async () => {
         try {
             const result = await service.logout();
             if (result) {
-                setCurrUser('');
+                userLogout();
                 onNavigate('/');
             }
         } catch (e) {
@@ -14,7 +16,7 @@ const HeaderUserInfo = ({userInfo, setCurrUser, onNavigate, service}) => {
     return (
         <div>
             <div style={{textAlign: 'right'}}>
-                <span>Welcome {userInfo}</span>
+                <span>Welcome {user.userInfo}</span>
                 <div onClick={handleLogout} style={{cursor: 'pointer'}}>Logout
                 </div>
             </div>
@@ -22,4 +24,11 @@ const HeaderUserInfo = ({userInfo, setCurrUser, onNavigate, service}) => {
     );
 };
 
-export default HeaderUserInfo;
+const mapStateToProps = state => {
+    return {user: state.userCredentialReducer}
+}
+
+const mapDispatchToProps = {
+    userLogout
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderUserInfo);
