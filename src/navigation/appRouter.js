@@ -5,11 +5,13 @@ import App from "../App";
 import LoginPage from "../pages/LoginPage";
 import CoursePage from "../pages/CoursePage";
 import CourseTypePage from "../pages/CourseTypePage";
+import ErrorPage from "../pages/ErrorPage";
 
 export const appRouter = (services) => createBrowserRouter([
     {
         path: NAVIGATION.INDEX,
         element: <App/>,
+        errorElement: <ErrorPage/>,
         children: [
             {index: true, element: <LoginPage service={services.authService}/>},
             {
