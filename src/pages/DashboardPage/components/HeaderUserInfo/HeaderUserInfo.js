@@ -8,16 +8,16 @@ const HeaderUserInfo = ({service, userState, postLogout}) => {
     const onNavigate = useNavigate();
     useEffect(() => {
         if (!userState.userInfo) {
-            onNavigate(NAVIGATION.INDEX);
+            onNavigate(NAVIGATION.INDEX.path);
         }
     }, [userState])
     const handleLogout = () => {
-        postLogout(service.doLogout)
+        postLogout(service.doLogout);
     }
     return (
         <div>
             <div style={{textAlign: 'right'}}>
-                <span>Welcome {userState.userInfo}</span>
+                <span>Welcome {userState.userInfo?.user}</span>
                 <div onClick={handleLogout} style={{cursor: 'pointer'}}>Logout
                 </div>
             </div>

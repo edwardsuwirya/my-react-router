@@ -13,8 +13,8 @@ export const ACTION = {
 }
 
 export const NAVIGATION = {
-    INDEX: '/',
-    HOME_ROUTE: 'home',
-    COURSE_ROUTE: 'course',
-    COURSE_TYPE_ROUTE: 'course-type'
+    INDEX: {path: '/', label: ''},
+    HOME_ROUTE: {path: 'home', label: ''},
+    COURSE_ROUTE: {path: 'course', label: 'Course'},
+    COURSE_TYPE_ROUTE: {path: 'course-type', label: 'Course Type'}
 }

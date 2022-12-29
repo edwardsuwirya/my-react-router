@@ -11,21 +11,21 @@ import CourseTypePage from "../pages/CourseTypePage";
 export const routerFactory = (services) => createBrowserRouter(
     [
         {
-            path: NAVIGATION.INDEX,
+            path: NAVIGATION.INDEX.path,
             element: <App/>,
             errorElement: <ErrorPage/>,
             children: [
                 {index: true, element: <LoginPage service={services.authService}/>},
                 {
-                    path: NAVIGATION.HOME_ROUTE,
+                    path: NAVIGATION.HOME_ROUTE.path,
                     element: <DashboardPage service={services.authService}/>,
                     children: [
                         {
-                            path: NAVIGATION.COURSE_ROUTE,
+                            path: NAVIGATION.COURSE_ROUTE.path,
                             element: <CoursePage/>,
                         },
                         {
-                            path: NAVIGATION.COURSE_TYPE_ROUTE,
+                            path: NAVIGATION.COURSE_TYPE_ROUTE.path,
                             element: <CourseTypePage/>,
                         }
                     ]

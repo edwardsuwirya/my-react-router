@@ -9,7 +9,8 @@ const userLoginSuccess = (user) => {
     return {
         type: ACTION.LOGIN_SUCCESS,
         payload: {
-            user: user.userInfo
+            user: user.userInfo,
+            page: user.pageInfo
         }
     }
 }
@@ -32,12 +33,18 @@ const userLogoutSuccess = () => {
     }
 }
 
-export const postLogin = (authLoginService) => async dispatch => {
+export const postLogin = (authLoginService, authPageService) => async dispatch => {
     dispatch(userLoginRequest())
     try {
-        const response = await authLoginService();
-        dispatch(userLoginSuccess(response));
+        const loginResponse = await authLoginService();
+        const pageResponse = await authPageService(loginResponse);
+        dispatch(userLoginSuccess({
+            userInfo: loginResponse.userInfo,
+            pageInfo: pageResponse.userPage
+        }));
+
     } catch (e) {
+        console.log(e)
         dispatch(userLoginError(e));
     }
 }

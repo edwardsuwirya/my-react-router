@@ -20,7 +20,7 @@ const useLoginPage = (service) => {
             clearForm();
         }
         if (userState.userInfo) {
-            onNavigate(NAVIGATION.HOME_ROUTE);
+            onNavigate(NAVIGATION.HOME_ROUTE.path);
         }
     }, [userState]);
 
@@ -38,7 +38,7 @@ const useLoginPage = (service) => {
         if (Object.keys(errors).length > 0) {
             dispatch(userLoginError(errors));
         } else {
-            dispatch(postLogin(() => service.doAuth(userData)))
+            dispatch(postLogin(() => service.doAuth(userData), service.doGetAuthPage))
         }
     }
     return {

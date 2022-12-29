@@ -11,11 +11,15 @@ export const userCredentialReducer = (state = userCredentialInitState, action) =
         case ACTION.LOGOUT_REQUEST:
             return {...state, isLoading: true}
         case ACTION.LOGIN_SUCCESS:
-            return {...state, isLoading: false, userInfo: action.payload.user}
+            return {
+                ...state, isLoading: false, userInfo: {
+                    user: action.payload.user, pages: action.payload.page
+                }
+            }
         case ACTION.LOGIN_ERROR:
             return {...state, isLoading: false, error: action.payload.error}
         case ACTION.LOGOUT_SUCCESS:
-            return {...state, isLoading: false, userInfo: null, error: null}
+            return {isLoading: false, userInfo: null, error: null}
         default:
             return state
     }

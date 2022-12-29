@@ -1,4 +1,5 @@
 import registeredUser from '../sample/user.json';
+import authorizedPage from '../sample/user_page.json';
 
 const authService = () => {
     const doAuth = ({userName, password}) => {
@@ -12,6 +13,13 @@ const authService = () => {
             }, 2000)
         })
     }
+    const doGetAuthPage = (userName) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({userPage: authorizedPage.pages})
+            }, 1000)
+        })
+    }
     const doLogout = () => {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -19,7 +27,7 @@ const authService = () => {
             }, 1000)
         })
     }
-    return {doAuth, doLogout}
+    return {doAuth, doLogout, doGetAuthPage}
 }
 
 export default authService;
