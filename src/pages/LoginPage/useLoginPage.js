@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 const useLoginPage = (service) => {
     const onNavigate = useNavigate();
     const dispatch = useDispatch();
-    const userState = useSelector(state => state.userCredentialReducer)
+    const userState = useSelector(state => state.userCredentialReducer);
     const userNameInputElement = useRef('');
     const passwordInputElement = useRef('');
     const clearForm = () => {
@@ -20,7 +20,6 @@ const useLoginPage = (service) => {
             clearForm();
         }
         if (userState.userInfo) {
-
             onNavigate(NAVIGATION.HOME_ROUTE);
         }
     }, [userState]);
