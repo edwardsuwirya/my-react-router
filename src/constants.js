@@ -11,3 +11,10 @@ export const ACTION = {
     LOGOUT_REQUEST: 'logout_request',
     LOGOUT_SUCCESS: 'logout_success',
 }
+
+export const NAVIGATION = {
+    INDEX: '/',
+    HOME_ROUTE: 'home',
+    COURSE_ROUTE: 'course',
+    COURSE_TYPE_ROUTE: 'course-type'
+}

@@ -1,9 +1,11 @@
 import {useEffect, useRef} from "react";
-import {errorMessage} from "../../constants";
+import {errorMessage, NAVIGATION} from "../../constants";
 import {postLogin, userLoginError} from "../../state/userCredential/userCredentialAction";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
-const useLoginPage = (onNavigate, service) => {
+const useLoginPage = (service) => {
+    const onNavigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.userCredentialReducer)
     const userNameInputElement = useRef('');
@@ -18,7 +20,8 @@ const useLoginPage = (onNavigate, service) => {
             clearForm();
         }
         if (userState.userInfo) {
-            onNavigate('/dashboard');
+
+            onNavigate(NAVIGATION.HOME_ROUTE);
         }
     }, [userState]);
 
@@ -36,7 +39,7 @@ const useLoginPage = (onNavigate, service) => {
         if (Object.keys(errors).length > 0) {
             dispatch(userLoginError(errors));
         } else {
-            dispatch(postLogin(() => service.auth(userData)))
+            dispatch(postLogin(() => service.doAuth(userData)))
         }
     }
     return {

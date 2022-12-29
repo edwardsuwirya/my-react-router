@@ -1,15 +1,17 @@
 import React, {useEffect} from 'react';
 import {postLogout} from "../../../../state/userCredential/userCredentialAction";
 import {connect} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
-const HeaderUserInfo = ({onNavigate, service, userState, postLogout}) => {
+const HeaderUserInfo = ({service, userState, postLogout}) => {
+    const onNavigate = useNavigate();
     useEffect(() => {
         if (!userState.userInfo) {
             onNavigate('/');
         }
     }, [userState])
     const handleLogout = () => {
-        postLogout(service.logout)
+        postLogout(service.doLogout)
     }
     return (
         <div>

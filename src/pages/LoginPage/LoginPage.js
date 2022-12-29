@@ -2,10 +2,10 @@ import useLoginPage from "./useLoginPage";
 import FormInput from "../../components/FormInput";
 import FormButton from "../../components/FormButton";
 
-const LoginPage = ({onNavigate, service}) => {
+const LoginPage = ({service}) => {
     const {
         userState, refs, handleAuth
-    } = useLoginPage(onNavigate, service)
+    } = useLoginPage(service)
     return (
         <div style={{display: 'flex', flexDirection: 'column', gap: '14px'}}>
             <FormInput id='userName'
