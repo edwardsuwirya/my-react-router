@@ -1,4 +1,4 @@
-import './formInput.css';
+import {StyledErrorLabel, StyledFlexColumn, StyledInput} from "../styled";
 
 const FormInput = (props) => {
     const {id, label, disabled = false, inputRef, value, onValueChange, type = 'text', error} = props;
@@ -15,15 +15,12 @@ const FormInput = (props) => {
         compProps = {...compProps, value, onChange: handleFormInput}
     }
     return (
-        <div className='container'>
-            <label htmlFor={id}>
-                {label}
-            </label>
-            <input {...compProps}/>
+        <StyledFlexColumn>
+            <StyledInput placeholder={label} {...compProps}/>
             {error &&
-                <span className='error'>{error[id]}</span>
+                <StyledErrorLabel>{error[id]}</StyledErrorLabel>
             }
-        </div>
+        </StyledFlexColumn>
     )
 }
 
