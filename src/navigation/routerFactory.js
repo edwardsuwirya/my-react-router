@@ -8,14 +8,15 @@ import CoursePage from "../pages/CoursePage";
 import CourseTypePage from "../pages/CourseTypePage";
 
 
-export const routerFactory = (services) => createBrowserRouter(
+export const routerFactory = (services, appTheme) => createBrowserRouter(
     [
         {
             path: NAVIGATION.INDEX.path,
-            element: <App/>,
+            element: <App theme={appTheme}/>,
             errorElement: <ErrorPage/>,
             children: [
                 {index: true, element: <LoginPage service={services.authService}/>},
+                // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
                     element: <DashboardPage service={services.authService}/>,

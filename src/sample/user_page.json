@@ -1,6 +1,7 @@
 {
   "userName": "enigma",
   "pages": [
-    "COURSE_ROUTE"
+    "COURSE_ROUTE",
+    "COURSE_TYPE_ROUTE"
   ]
 }

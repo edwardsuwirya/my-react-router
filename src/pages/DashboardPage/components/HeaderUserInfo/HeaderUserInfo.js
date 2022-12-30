@@ -3,6 +3,8 @@ import {postLogout} from "../../../../state/userCredential/userCredentialAction"
 import {connect} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {NAVIGATION} from "../../../../constants";
+import {LogoutLink, UserInfoContainer} from "./HeaderUserInfoStyle";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const HeaderUserInfo = ({service, userState, postLogout}) => {
     const onNavigate = useNavigate();
@@ -15,13 +17,12 @@ const HeaderUserInfo = ({service, userState, postLogout}) => {
         postLogout(service.doLogout);
     }
     return (
-        <div>
-            <div style={{textAlign: 'right'}}>
-                <span>Welcome {userState.userInfo?.user}</span>
-                <div onClick={handleLogout} style={{cursor: 'pointer'}}>Logout
-                </div>
-            </div>
-        </div>
+        <UserInfoContainer>
+            <LogoutLink onClick={handleLogout}>
+                <FontAwesomeIcon icon={['fas', 'user-graduate']}
+                                 style={{color: 'white'}}/> Logout {userState.userInfo?.user}
+            </LogoutLink>
+        </UserInfoContainer>
     );
 };
 

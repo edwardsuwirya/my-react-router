@@ -1,11 +1,9 @@
-import './App.css';
 import {Outlet} from "react-router-dom";
 import {ThemeProvider} from "styled-components";
-import {appTheme} from "./appTheme";
 
-const App = () => {
+const App = ({theme}) => {
     return (
-        <ThemeProvider theme={appTheme}>
+        <ThemeProvider theme={theme}>
             <Outlet/>
         </ThemeProvider>
     );

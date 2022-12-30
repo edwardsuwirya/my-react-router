@@ -7,4 +7,14 @@ export const StyledButton = styled.button`
   border-radius: 16px;
   border: none;
   letter-spacing: 2px;
+  cursor: pointer;
+`
+
+export const ButtonLabel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 24px;
 `
