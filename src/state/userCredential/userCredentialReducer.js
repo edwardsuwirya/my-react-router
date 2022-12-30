@@ -7,7 +7,7 @@ const userCredentialInitState = {
 export const userCredentialReducer = (state = userCredentialInitState, action) => {
     switch (action.type) {
         case ACTION.LOGIN_REQUEST:
-            return {...state, isLoading: true}
+            return {...state, error: null, isLoading: true}
         case ACTION.LOGOUT_REQUEST:
             return {...state, isLoading: true}
         case ACTION.LOGIN_SUCCESS:
