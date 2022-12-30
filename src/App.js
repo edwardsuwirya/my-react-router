@@ -1,9 +1,13 @@
 import './App.css';
 import {Outlet} from "react-router-dom";
+import {ThemeProvider} from "styled-components";
+import {appTheme} from "./appTheme";
 
 const App = () => {
     return (
-        <Outlet/>
+        <ThemeProvider theme={appTheme}>
+            <Outlet/>
+        </ThemeProvider>
     );
 }
 

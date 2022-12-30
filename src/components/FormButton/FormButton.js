@@ -1,4 +1,4 @@
-import {StyledButton} from "../styled";
+import {StyledButton} from "./FormButtonStyle";
 
 const FormButton = (props) => {
     const {id, label, disabled = false, onClick} = props;

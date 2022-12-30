@@ -2,16 +2,25 @@ import useLoginPage from "./useLoginPage";
 import FormInput from "../../components/FormInput";
 import FormButton from "../../components/FormButton";
 import {
+    InstagramText,
     LoginActionWrapper,
+    LoginBottomImage,
     LoginBrandImg,
     LoginContainer,
     LoginForm,
     LoginFormWrapper,
     LoginWrapper,
+    SignUpLink,
+    SignUpText,
+    SignUpWrapper,
+    SocMedWrapper,
     WelcomeLoginText,
     WelcomeText1,
     WelcomeText2,
 } from "./LoginPageStyle";
+
+import instagram from "../../assets/image/instagram.png";
+import tree from "../../assets/image/tree.png"
 
 const LoginPage = ({service}) => {
     const {
@@ -23,6 +32,10 @@ const LoginPage = ({service}) => {
                 <LoginBrandImg>
                     <WelcomeText1>Nice to see you again</WelcomeText1>
                     <WelcomeText2>WELCOME BACK</WelcomeText2>
+                    <SocMedWrapper>
+                        <img src={instagram} width={36} height={36} alt={'instagram'}/>
+                        <InstagramText>enigmacamp</InstagramText>
+                    </SocMedWrapper>
                 </LoginBrandImg>
                 <LoginFormWrapper>
                     <LoginForm>
@@ -45,8 +58,13 @@ const LoginPage = ({service}) => {
                                         disabled={userState.isLoading}/>
                             {userState.error &&
                                 <span style={{color: 'red'}}>{userState.error.request}</span>}
+                            <SignUpWrapper>
+                                <SignUpText>Don't have an account ?</SignUpText> <SignUpLink>Sign Up</SignUpLink>
+                            </SignUpWrapper>
                         </LoginActionWrapper>
                     </LoginForm>
+                    <LoginBottomImage src={tree}/>
+
                 </LoginFormWrapper>
             </LoginWrapper>
         </LoginContainer>

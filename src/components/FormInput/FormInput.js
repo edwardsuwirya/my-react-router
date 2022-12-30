@@ -1,4 +1,4 @@
-import {StyledErrorLabel, StyledFlexColumn, StyledInput} from "../styled";
+import {StyledErrorLabel, StyledFlexColumn, StyledInput} from "./FormInputStyle";
 
 const FormInput = (props) => {
     const {id, label, disabled = false, inputRef, value, onValueChange, type = 'text', error} = props;
