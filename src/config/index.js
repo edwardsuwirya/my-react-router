@@ -1,36 +1,16 @@
-import {serviceFactory} from "../services";
-import {configureStore} from "../state/store";
-import {routerFactory} from "../navigation/routerFactory";
-import * as localforage from "localforage";
-import {storage} from "../utils/storage";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBookOpen, faLaptopCode, faSchool, faUserGraduate} from "@fortawesome/free-solid-svg-icons";
+import {themeConfig} from "./theme";
+import {routerConfig} from "./routerNav";
+import {localStorageConfig} from "./localStorage";
+import {reduxStoreConfig} from "./reduxStore";
+import {apiConfig} from "./apiService";
 
 
 const appConfig = () => {
-    const services = serviceFactory();
-    const store = configureStore();
-    const storageEngine = localforage.config({
-        driver: localforage.WEBSQL,
-        name: 'myApp',
-        version: 1.0,
-        size: 4980736,
-        storeName: 'app',
-        description: 'Login chanllenge'
-    });
-    const localstorage = storage(storageEngine);
-
-    library.add(faLaptopCode, faBookOpen, faSchool, faUserGraduate)
-
-    const appTheme = {
-        main: "forestgreen",
-        second: "darkgreen",
-        textError: "tomato",
-        textWhite: "whitesmoke",
-        textPlaceholder: "lightgrey"
-    };
-    const router = routerFactory(services, appTheme, storage);
-
+    const services = apiConfig();
+    const store = reduxStoreConfig();
+    const localstorage = localStorageConfig();
+    const appTheme = themeConfig();
+    const router = routerConfig(services, appTheme, localstorage);
     return {
         services, store, router, localstorage, appTheme
     }

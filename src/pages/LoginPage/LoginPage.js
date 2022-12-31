@@ -21,6 +21,7 @@ import {
 
 import instagram from "../../assets/image/instagram.png";
 import tree from "../../assets/image/tree.png"
+import {StyledErrorLabel} from "../../components/ErrorLabel";
 
 const LoginPage = ({service}) => {
     const {
@@ -57,7 +58,7 @@ const LoginPage = ({service}) => {
                             <FormButton id={'buttonLogin'} onClick={handleAuth} label={'Sign In'}
                                         disabled={userState.isLoading}/>
                             {userState.error &&
-                                <span style={{color: 'red'}}>{userState.error.request}</span>}
+                                <StyledErrorLabel>{userState.error.request}</StyledErrorLabel>}
                             <SignUpWrapper>
                                 <SignUpText>Don't have an account ?</SignUpText> <SignUpLink>Sign Up</SignUpLink>
                             </SignUpWrapper>

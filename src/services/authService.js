@@ -1,30 +1,22 @@
-import registeredUser from '../sample/user.json';
-import authorizedPage from '../sample/user_page.json';
+import {SERVICE} from "../constants";
 
-const authService = () => {
-    const doAuth = ({userName, password}) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (userName === registeredUser.userName && password === registeredUser.password) {
-                    resolve({userInfo: userName})
-                } else {
-                    reject({'request': 'unauthorized'});
-                }
-            }, 2000)
+const authService = ({doPost, doGet}) => {
+    const doAuth = async ({userName, password}) => {
+        return await doPost({
+            url: SERVICE.LOGIN, data: {
+                userName: userName,
+                password: password
+            }
         })
     }
-    const doGetAuthPage = (userName) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({userPage: authorizedPage.pages})
-            }, 1000)
+    const doGetAuthPage = async (userName) => {
+        return await doGet({
+            url: `${SERVICE.USER_PAGES}?user=` + userName
         })
     }
-    const doLogout = () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(true)
-            }, 1000)
+    const doLogout = async () => {
+        return await doPost({
+            url: SERVICE.LOGOUT
         })
     }
     return {doAuth, doLogout, doGetAuthPage}

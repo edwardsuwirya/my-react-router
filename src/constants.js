@@ -18,3 +18,9 @@ export const NAVIGATION = {
     COURSE_ROUTE: {path: 'course', label: 'Course', icon: 'laptop-code'},
     COURSE_TYPE_ROUTE: {path: 'course-type', label: 'Course Type', icon: 'book-open'}
 }
+
+export const SERVICE = {
+    LOGIN: '/login',
+    USER_PAGES: '/user-pages',
+    LOGOUT: '/logout'
+}

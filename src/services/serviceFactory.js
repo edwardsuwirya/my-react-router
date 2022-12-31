@@ -1,7 +1,7 @@
 import authService from "./authService";
 
-export const serviceFactory = () => {
+export const serviceFactory = (apiClient) => {
     return {
-        authService: authService(),
+        authService: authService(apiClient),
     }
 }

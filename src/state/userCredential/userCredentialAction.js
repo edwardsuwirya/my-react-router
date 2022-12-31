@@ -37,15 +37,14 @@ export const postLogin = (authLoginService, authPageService) => async dispatch =
     dispatch(userLoginRequest())
     try {
         const loginResponse = await authLoginService();
-        const pageResponse = await authPageService(loginResponse);
+        const pageResponse = await authPageService(loginResponse.name);
         dispatch(userLoginSuccess({
-            userInfo: loginResponse.userInfo,
-            pageInfo: pageResponse.userPage
+            userInfo: loginResponse.name,
+            pageInfo: pageResponse.pages
         }));
-
     } catch (e) {
-        console.log(e)
-        dispatch(userLoginError(e));
+        console.log(e.message)
+        dispatch(userLoginError({'request': e.message}));
     }
 }
 export const postLogout = (authLogoutService) => async dispatch => {

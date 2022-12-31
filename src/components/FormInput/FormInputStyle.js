@@ -9,6 +9,7 @@ export const StyledInput = styled.input`
   padding: 12px;
   letter-spacing: 1px;
   border-radius: 2px;
+  margin-bottom: 4px;
 
   ::placeholder, ::-webkit-input-placeholder {
     color: ${props => props.theme.textPlaceholder};
@@ -24,12 +25,6 @@ export const StyledInput = styled.input`
 `
 
 
-export const StyledErrorLabel = styled.span`
-  color: ${props => props.theme.textError};
-  font-size: 12px;
-  margin: 4px;
-  font-style: italic;
-`
 
 export const StyledFlexColumn = styled.div`
   display: flex;
