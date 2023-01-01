@@ -1,14 +1,9 @@
 import {SERVICE} from "../constants";
 
 const courseService = ({doGet}) => {
-    const doGetCourse = async (page, token) => {
-        const config = {
-            headers: {
-                Authorization: `bearer ${token}`
-            },
-        };
+    const doGetCourse = async (page) => {
         return await doGet({
-            url: `${SERVICE.COURSES}?page=` + page, config: config
+            url: `${SERVICE.COURSES}?page=` + page
         })
     }
     return {doGetCourse}

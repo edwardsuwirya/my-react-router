@@ -6,9 +6,9 @@ import {apiConfig} from "./api";
 
 
 const appConfig = () => {
-    const api = apiConfig();
-    const store = reduxStoreConfig();
     const localstorage = localStorageConfig();
+    const api = apiConfig(localstorage);
+    const store = reduxStoreConfig();
     const appTheme = themeConfig();
     const router = routerConfig(api, appTheme, localstorage);
     return {

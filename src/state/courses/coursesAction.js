@@ -22,11 +22,10 @@ export const courseListError = (error) => {
     }
 }
 
-export const getCourseList = (courseService, localStorage) => async dispatch => {
+export const getCourseList = (courseService) => async dispatch => {
     dispatch(courseListRequest())
     try {
-        const token = await localStorage.get('token');
-        const response = await courseService(token);
+        const response = await courseService();
         dispatch(courseListSuccess(response));
     } catch (e) {
         console.log(e.message)

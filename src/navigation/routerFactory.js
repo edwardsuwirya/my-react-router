@@ -23,7 +23,7 @@ export const routerFactory = (services, appTheme, localStorage) => createBrowser
                     children: [
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
-                            element: <CoursePage service={services.courseService} localStorage={localStorage}/>,
+                            element: <CoursePage service={services.courseService}/>,
                         },
                         {
                             path: NAVIGATION.COURSE_TYPE_ROUTE.path,
