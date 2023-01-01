@@ -11,7 +11,7 @@ import {
 import NavLink from "../../components/NavLink";
 import {Outlet} from "react-router-dom";
 
-const DashboardPage = ({onNavigate, service}) => {
+const DashboardPage = ({onNavigate, service, localStorage}) => {
     const userState = useSelector(state => state.userCredentialReducer);
 
     const elem = userState.userInfo?.pages.map((p) => {
@@ -24,7 +24,7 @@ const DashboardPage = ({onNavigate, service}) => {
                 <MenuContainer>
                     {elem}
                 </MenuContainer>
-                <HeaderUserInfo onNavigate={onNavigate} service={service}/>
+                <HeaderUserInfo onNavigate={onNavigate} service={service} localStorage={localStorage}/>
             </DashboardMenuContainer>
             <DashboardContentContainer>
                 <Outlet/>

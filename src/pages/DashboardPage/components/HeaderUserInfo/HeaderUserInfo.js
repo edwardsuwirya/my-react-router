@@ -6,7 +6,7 @@ import {NAVIGATION} from "../../../../constants";
 import {LogoutLink, UserInfoContainer} from "./HeaderUserInfoStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const HeaderUserInfo = ({service, userState, postLogout}) => {
+const HeaderUserInfo = ({service, userState, postLogout, localStorage}) => {
     const onNavigate = useNavigate();
     useEffect(() => {
         if (!userState.userInfo) {
@@ -14,7 +14,7 @@ const HeaderUserInfo = ({service, userState, postLogout}) => {
         }
     }, [userState])
     const handleLogout = () => {
-        postLogout(service.doLogout);
+        postLogout(service.doLogout, localStorage);
     }
     return (
         <UserInfoContainer>
@@ -31,6 +31,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    postLogout: (authService) => dispatch(postLogout(authService))
+    postLogout: (authService, localStorage) => dispatch(postLogout(authService, localStorage))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderUserInfo);

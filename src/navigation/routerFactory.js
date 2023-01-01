@@ -8,22 +8,22 @@ import CoursePage from "../pages/CoursePage";
 import CourseTypePage from "../pages/CourseTypePage";
 
 
-export const routerFactory = (services, appTheme) => createBrowserRouter(
+export const routerFactory = (services, appTheme, localStorage) => createBrowserRouter(
     [
         {
             path: NAVIGATION.INDEX.path,
             element: <App theme={appTheme}/>,
             errorElement: <ErrorPage/>,
             children: [
-                {index: true, element: <LoginPage service={services.authService}/>},
+                {index: true, element: <LoginPage service={services.authService} localStorage={localStorage}/>},
                 // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
-                    element: <DashboardPage service={services.authService}/>,
+                    element: <DashboardPage service={services.authService} localStorage={localStorage}/>,
                     children: [
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
-                            element: <CoursePage/>,
+                            element: <CoursePage service={services.courseService} localStorage={localStorage}/>,
                         },
                         {
                             path: NAVIGATION.COURSE_TYPE_ROUTE.path,

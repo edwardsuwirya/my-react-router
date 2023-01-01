@@ -4,7 +4,7 @@ import {postLogin, userLoginError} from "../../state/userCredential/userCredenti
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
-const useLoginPage = (service) => {
+const useLoginPage = (service, localStorage) => {
     const onNavigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.userCredentialReducer);
@@ -38,7 +38,7 @@ const useLoginPage = (service) => {
         if (Object.keys(errors).length > 0) {
             dispatch(userLoginError(errors));
         } else {
-            dispatch(postLogin(() => service.doAuth(userData), service.doGetAuthPage))
+            dispatch(postLogin(() => service.doAuth(userData), service.doGetAuthPage, localStorage))
         }
     }
     return {

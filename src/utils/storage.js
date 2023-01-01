@@ -4,18 +4,27 @@ export const storage = (storageEngine) => {
             await storageEngine.setItem(key, value)
         } catch (e) {
             console.log(e)
+            throw new Error(e);
         }
     }
     const get = async (key) => {
         try {
-            const val = await storageEngine.getItem(key);
-            return val;
+            return await storageEngine.getItem(key);
+        } catch (e) {
+            console.log(e);
+            throw new Error(e);
+        }
+    }
+    const clear = async () => {
+        try {
+            await storageEngine.clear();
         } catch (e) {
             console.log(e)
+            throw new Error(e);
         }
     }
 
     return {
-        get, set
+        get, set, clear
     }
 }

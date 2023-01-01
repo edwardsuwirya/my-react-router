@@ -33,11 +33,12 @@ const userLogoutSuccess = () => {
     }
 }
 
-export const postLogin = (authLoginService, authPageService) => async dispatch => {
+export const postLogin = (authLoginService, authPageService, localStorage) => async dispatch => {
     dispatch(userLoginRequest())
     try {
         const loginResponse = await authLoginService();
         const pageResponse = await authPageService(loginResponse.name);
+        await localStorage.set('token', loginResponse.token);
         dispatch(userLoginSuccess({
             userInfo: loginResponse.name,
             pageInfo: pageResponse.pages
@@ -47,10 +48,11 @@ export const postLogin = (authLoginService, authPageService) => async dispatch =
         dispatch(userLoginError({'request': e.message}));
     }
 }
-export const postLogout = (authLogoutService) => async dispatch => {
-    dispatch(userLogoutRequest())
+export const postLogout = (authLogoutService, localStorage) => async dispatch => {
+    dispatch(userLogoutRequest());
     try {
         const response = await authLogoutService();
+        await localStorage.clear();
         dispatch(userLogoutSuccess(response));
     } catch (e) {
         console.log(e)
