@@ -16,9 +16,9 @@ const apiClientFactory = (client) => {
                 throw new Error(responseStatus);
         }
     }
-    const doPost = async ({url = '', data = null}) => {
+    const doPost = async ({url = '', data = null, config = null}) => {
         try {
-            const response = await client.post(url, data,);
+            const response = await client.post(url, data, config);
             return response.data;
         } catch (e) {
             if (e.response) {
@@ -31,9 +31,9 @@ const apiClientFactory = (client) => {
             throw new Error(e);
         }
     }
-    const doGet = async ({url = ''}) => {
+    const doGet = async ({url = '', config = null}) => {
         try {
-            const response = await client.get(url);
+            const response = await client.get(url, config);
             return response.data;
         } catch (e) {
             if (e.response) {
