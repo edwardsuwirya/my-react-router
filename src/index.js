@@ -5,13 +5,19 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router-dom";
 import appConfig from "./config";
+import {DepsProvider} from "./utils/contexts/dependencyContext";
+import {AppThemeProvider} from "./utils/contexts/themeContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const config = appConfig();
 root.render(
     <React.StrictMode>
         <Provider store={config.store}>
-            <RouterProvider router={config.router}/>
+            <AppThemeProvider theme={config.appTheme}>
+                <DepsProvider services={config.api} localstorage={config.localstorage}>
+                    <RouterProvider router={config.router}/>
+                </DepsProvider>
+            </AppThemeProvider>
         </Provider>
 
     </React.StrictMode>

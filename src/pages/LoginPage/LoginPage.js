@@ -23,10 +23,10 @@ import instagram from "../../assets/image/instagram.png";
 import tree from "../../assets/image/tree.png"
 import {StyledErrorLabel} from "../../components/ErrorLabel";
 
-const LoginPage = ({service, localStorage}) => {
+const LoginPage = () => {
     const {
         userState, refs, handleAuth
-    } = useLoginPage(service, localStorage)
+    } = useLoginPage()
     return (
         <LoginContainer>
             <LoginWrapper>

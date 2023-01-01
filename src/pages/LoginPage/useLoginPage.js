@@ -3,8 +3,10 @@ import {errorMessage, NAVIGATION} from "../../constants";
 import {postLogin, userLoginError} from "../../state/userCredential/userCredentialAction";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {useDeps} from "../../utils/hooks/useDeps";
 
-const useLoginPage = (service, localStorage) => {
+const useLoginPage = () => {
+    const {services,localstorage} = useDeps();
     const onNavigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.userCredentialReducer);
@@ -38,7 +40,7 @@ const useLoginPage = (service, localStorage) => {
         if (Object.keys(errors).length > 0) {
             dispatch(userLoginError(errors));
         } else {
-            dispatch(postLogin(() => service.doAuth(userData), service.doGetAuthPage, localStorage))
+            dispatch(postLogin(() => services.authService.doAuth(userData), services.authService.doGetAuthPage, localstorage))
         }
     }
     return {

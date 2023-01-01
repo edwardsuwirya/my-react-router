@@ -7,10 +7,10 @@ import {apiConfig} from "./api";
 
 const appConfig = () => {
     const localstorage = localStorageConfig();
-    const api = apiConfig(localstorage);
+    const api = apiConfig(localstorage); // local storage untuk kebutuhan token interceptor
     const store = reduxStoreConfig();
     const appTheme = themeConfig();
-    const router = routerConfig(api, appTheme, localstorage);
+    const router = routerConfig();
     return {
         api, store, router, localstorage, appTheme
     }

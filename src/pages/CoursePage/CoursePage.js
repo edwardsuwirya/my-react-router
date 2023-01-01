@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getCourseList} from "../../state/courses/coursesAction";
+import {useDeps} from "../../utils/hooks/useDeps";
 
-const CoursePage = ({service}) => {
+const CoursePage = () => {
+    const {services} = useDeps();
     const [currPage, setCurrPage] = useState(1)
     const dispatch = useDispatch();
     const coursesState = useSelector(state => state.coursesReducer);
 
     useEffect(() => {
-        dispatch(getCourseList(() => service.doGetCourse(currPage)))
+        dispatch(getCourseList(() => services.courseService.doGetCourse(currPage)))
     }, [currPage]);
 
     return (<div>

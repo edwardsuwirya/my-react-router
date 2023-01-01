@@ -5,8 +5,12 @@ import {useNavigate} from "react-router-dom";
 import {NAVIGATION} from "../../../../constants";
 import {LogoutLink, UserInfoContainer} from "./HeaderUserInfoStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useDeps} from "../../../../utils/hooks/useDeps";
 
-const HeaderUserInfo = ({service, userState, postLogout, localStorage}) => {
+// Using mapStateToPros and mapDispatchToProps, example purpose only
+// Another technique using useSelector or useDispatch
+const HeaderUserInfo = ({userState, postLogout}) => {
+    const {services, localstorage} = useDeps();
     const onNavigate = useNavigate();
     useEffect(() => {
         if (!userState.userInfo) {
@@ -14,7 +18,7 @@ const HeaderUserInfo = ({service, userState, postLogout, localStorage}) => {
         }
     }, [userState])
     const handleLogout = () => {
-        postLogout(service.doLogout, localStorage);
+        postLogout(services.authService.doLogout, localstorage);
     }
     return (
         <UserInfoContainer>
