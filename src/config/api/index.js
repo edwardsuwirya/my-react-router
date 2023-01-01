@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiClientFactory from "../../services/apiClientFactory";
+import apiClientFactory from "../../utils/apiClient/apiClientFactory";
 import {serviceFactory} from "../../services";
 
 export const apiConfig = () => {

@@ -1,6 +1,6 @@
-import UnauthorizedError from "../utils/errors/unauthorizedError";
-import BadRequestError from "../utils/errors/badRequestError";
-import NotFoundError from "../utils/errors/NotFoundError";
+import UnauthorizedError from "../errors/unauthorizedError";
+import BadRequestError from "../errors/badRequestError";
+import NotFoundError from "../errors/NotFoundError";
 
 const apiClientFactory = (client) => {
 
