@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import ErrorPage from "../pages/ErrorPage";
 import CoursePage from "../pages/CoursePage";
 import CourseTypePage from "../pages/CourseTypePage";
+import ProtectedRoute from "./ProtectedRoute";
 
 
 export const routerFactory = (services, appTheme, localStorage) => createBrowserRouter(
@@ -19,8 +20,9 @@ export const routerFactory = (services, appTheme, localStorage) => createBrowser
                 // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
-                    element: <DashboardPage service={services.authService} localStorage={localStorage}/>,
+                    element: <ProtectedRoute/>,
                     children: [
+                        {index: true, element: <DashboardPage service={services.authService} localStorage={localStorage}/>},
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
                             element: <CoursePage service={services.courseService}/>,
