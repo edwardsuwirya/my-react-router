@@ -1,18 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {postLogout} from "../../../../state/userCredential/userCredentialAction";
 import {connect} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {NAVIGATION} from "../../../../constants";
 import {LogoutLink, UserInfoContainer} from "./HeaderUserInfoStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const HeaderUserInfo = ({service, userState, postLogout, localStorage}) => {
-    const onNavigate = useNavigate();
-    useEffect(() => {
-        if (!userState.userInfo) {
-            onNavigate(NAVIGATION.INDEX.path);
-        }
-    }, [userState])
+const HeaderUserInfo = ({service, userState, postLogout,localStorage}) => {
     const handleLogout = () => {
         postLogout(service.doLogout, localStorage);
     }
