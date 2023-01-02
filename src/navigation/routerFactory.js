@@ -20,9 +20,8 @@ export const routerFactory = (services, appTheme, localStorage) => createBrowser
                 // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
-                    element: <ProtectedRoute/>,
+                    element: <ProtectedRoute service={services.authService} localStorage={localStorage}/>,
                     children: [
-                        {index: true, element: <DashboardPage service={services.authService} localStorage={localStorage}/>},
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
                             element: <CoursePage service={services.courseService}/>,
