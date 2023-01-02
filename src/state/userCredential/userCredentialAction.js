@@ -43,8 +43,8 @@ export const postLogin = (authLoginService, authPageService) => async dispatch =
             pageInfo: pageResponse.pages
         }));
     } catch (e) {
-        console.log(e.message)
-        dispatch(userLoginError({'request': e.message}));
+        console.log(e.message);
+        dispatch(userLoginError({'request': 'Oops... something went wrong'}));
     }
 }
 export const postLogout = (authLogoutService) => async dispatch => {
@@ -53,6 +53,7 @@ export const postLogout = (authLogoutService) => async dispatch => {
         const response = await authLogoutService();
         dispatch(userLogoutSuccess(response));
     } catch (e) {
-        console.log(e)
+        console.log(e.message);
+        dispatch(userLoginError({'request': 'Oops... something went wrong'}));
     }
 }
