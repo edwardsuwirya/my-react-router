@@ -1,8 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {postLogout} from "../../../../state/userCredential/userCredentialAction";
 import {connect} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {NAVIGATION} from "../../../../constants";
 import {LogoutLink, UserInfoContainer} from "./HeaderUserInfoStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useDeps} from "../../../../utils/hooks/useDeps";
@@ -11,12 +9,6 @@ import {useDeps} from "../../../../utils/hooks/useDeps";
 // Another technique using useSelector or useDispatch
 const HeaderUserInfo = ({userState, postLogout}) => {
     const {services, localstorage} = useDeps();
-    const onNavigate = useNavigate();
-    useEffect(() => {
-        if (!userState.data) {
-            onNavigate(NAVIGATION.INDEX.path);
-        }
-    }, [userState])
     const handleLogout = () => {
         postLogout(services.authService.doLogout, localstorage);
     }

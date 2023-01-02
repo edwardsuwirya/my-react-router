@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import ErrorPage from "../pages/ErrorPage";
 import CoursePage from "../pages/CoursePage";
 import CourseTypePage from "../pages/CourseTypePage";
+import ProtectedRoute from "./ProtectedRoute";
 
 
 export const routerFactory = () => createBrowserRouter(
@@ -19,7 +20,7 @@ export const routerFactory = () => createBrowserRouter(
                 // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
-                    element: <DashboardPage/>,
+                    element: <ProtectedRoute/>,
                     children: [
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
