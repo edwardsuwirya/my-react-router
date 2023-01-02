@@ -44,8 +44,8 @@ export const postLogin = (authLoginService, authPageService, localStorage) => as
             pageInfo: pageResponse.pages
         }));
     } catch (e) {
-        console.log(e.message)
-        dispatch(userLoginError({'request': e.message}));
+        console.log(e.message);
+        dispatch(userLoginError({'request': 'Oops... something went wrong'}));
     }
 }
 export const postLogout = (authLogoutService, localStorage) => async dispatch => {
@@ -55,6 +55,7 @@ export const postLogout = (authLogoutService, localStorage) => async dispatch =>
         await localStorage.clear();
         dispatch(userLogoutSuccess(response));
     } catch (e) {
-        console.log(e)
+        console.log(e.message);
+        dispatch(userLoginError({'request': 'Oops... something went wrong'}));
     }
 }
