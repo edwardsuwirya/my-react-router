@@ -13,7 +13,7 @@ const HeaderUserInfo = ({userState, postLogout}) => {
     const {services, localstorage} = useDeps();
     const onNavigate = useNavigate();
     useEffect(() => {
-        if (!userState.userInfo) {
+        if (!userState.data) {
             onNavigate(NAVIGATION.INDEX.path);
         }
     }, [userState])
@@ -24,7 +24,7 @@ const HeaderUserInfo = ({userState, postLogout}) => {
         <UserInfoContainer>
             <LogoutLink onClick={handleLogout}>
                 <FontAwesomeIcon icon={['fas', 'user-graduate']}
-                                 style={{color: 'white'}}/> Logout {userState.userInfo?.user}
+                                 style={{color: 'white'}}/> Logout {userState.data?.userInfo}
             </LogoutLink>
         </UserInfoContainer>
     );

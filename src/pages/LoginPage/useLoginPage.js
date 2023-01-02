@@ -6,10 +6,15 @@ import {useNavigate} from "react-router-dom";
 import {useDeps} from "../../utils/hooks/useDeps";
 
 const useLoginPage = () => {
-    const {services,localstorage} = useDeps();
+    const {services, localstorage} = useDeps();
     const onNavigate = useNavigate();
     const dispatch = useDispatch();
-    const userState = useSelector(state => state.userCredentialReducer);
+    const userState = useSelector(state => {
+        // console.log('loading', state.loadingReducer.login);
+        // console.log('data', state.userCredentialReducer.data);
+        // console.log('error', state.loadingReducer.errorReducer.error);
+        return {isLoading: state.loadingReducer.login, ...state.userCredentialReducer, error: state.errorReducer.login}
+    });
     const userNameInputElement = useRef('');
     const passwordInputElement = useRef('');
     const clearForm = () => {
@@ -21,7 +26,7 @@ const useLoginPage = () => {
         if (userState.error) {
             clearForm();
         }
-        if (userState.userInfo) {
+        if (userState.data) {
             onNavigate(NAVIGATION.HOME_ROUTE.path);
         }
     }, [userState]);

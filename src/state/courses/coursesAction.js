@@ -9,7 +9,7 @@ const courseListSuccess = (courses) => {
     return {
         type: ACTION.COURSE_LIST_SUCCESS,
         payload: {
-            courses
+            data: courses
         }
     }
 }

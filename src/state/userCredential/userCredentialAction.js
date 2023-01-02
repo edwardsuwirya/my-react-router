@@ -9,8 +9,7 @@ const userLoginSuccess = (user) => {
     return {
         type: ACTION.LOGIN_SUCCESS,
         payload: {
-            user: user.userInfo,
-            page: user.pageInfo
+            data: user
         }
     }
 }

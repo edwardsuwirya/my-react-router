@@ -12,9 +12,11 @@ import NavLink from "../../components/NavLink";
 import {Outlet} from "react-router-dom";
 
 const DashboardPage = () => {
-    const userState = useSelector(state => state.userCredentialReducer);
+    const userState = useSelector(state => {
+        return state.userCredentialReducer
+    });
 
-    const elem = userState.userInfo?.pages.map((p) => {
+    const elem = userState.data?.pageInfo.map((p) => {
         return <NavLink key={p} path={NAVIGATION[p].path} label={NAVIGATION[p].label} icon={NAVIGATION[p].icon}/>
     })
     return (
