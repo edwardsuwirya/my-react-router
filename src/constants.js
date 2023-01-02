@@ -23,8 +23,8 @@ export const NAVIGATION = {
 }
 
 export const SERVICE = {
-    LOGIN: '/login',
-    USER_PAGES: '/user-pages',
-    LOGOUT: '/logout',
+    LOGIN: '/auth/login',
+    USER_PAGES: '/auth/user-pages',
+    LOGOUT: '/auth/logout',
     COURSES: '/courses'
 }
