@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router-dom";
-import appConfig from "./config";
+import {appConfig} from "./config";
 import {DepsProvider} from "./utils/contexts/dependencyContext";
 import {AppThemeProvider} from "./utils/contexts/themeContext";
 

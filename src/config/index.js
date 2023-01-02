@@ -5,7 +5,7 @@ import {reduxStoreConfig} from "./reduxStore";
 import {apiConfig} from "./api";
 
 
-const appConfig = () => {
+export const appConfig = () => {
     const localstorage = localStorageConfig();
     const api = apiConfig(localstorage); // local storage untuk kebutuhan token interceptor
     const store = reduxStoreConfig();
@@ -15,4 +15,3 @@ const appConfig = () => {
         api, store, router, localstorage, appTheme
     }
 }
-export default appConfig;
