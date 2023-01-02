@@ -20,9 +20,8 @@ export const routerFactory = (services, appTheme) => createBrowserRouter(
                 // {index: true, element: <DashboardPage service={services.authService}/>},
                 {
                     path: NAVIGATION.HOME_ROUTE.path,
-                    element: <ProtectedRoute/>,
+                    element: <ProtectedRoute service={services.authService}/>,
                     children: [
-                        {index: true, element: <DashboardPage service={services.authService}/>},
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
                             element: <CoursePage/>,
