@@ -22,7 +22,6 @@ export const routerFactory = () => createBrowserRouter(
                     path: NAVIGATION.HOME_ROUTE.path,
                     element: <ProtectedRoute/>,
                     children: [
-                        {index: true, element: <DashboardPage/>},
                         {
                             path: NAVIGATION.COURSE_ROUTE.path,
                             element: <CoursePage/>,
