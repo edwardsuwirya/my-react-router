@@ -1,6 +1,7 @@
 import UnauthorizedError from "../errors/unauthorizedError";
 import BadRequestError from "../errors/badRequestError";
 import NotFoundError from "../errors/NotFoundError";
+import ServerError from "../errors/serverError";
 
 const apiClientFactory = (client) => {
 
@@ -12,8 +13,12 @@ const apiClientFactory = (client) => {
                 throw new UnauthorizedError();
             case 404:
                 throw new NotFoundError();
+            case 500:
+                throw new ServerError();
+            case 504:
+                throw new ServerError("Gateway Timeout");
             default:
-                throw new Error(responseStatus);
+                throw new ServerError("Unknown error");
         }
     }
     const doPost = async ({url = '', data = null, config = null}) => {
